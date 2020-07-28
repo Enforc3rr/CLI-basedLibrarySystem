@@ -14,7 +14,7 @@ public class Add {
     static PreparedStatement pst;
     static {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Library","root","gtaplayer01");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Library","root","pass");
             st = conn.createStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
