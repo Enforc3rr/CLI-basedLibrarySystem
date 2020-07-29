@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Admin {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +12,7 @@ public class Admin {
 
     static {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Library","root","pass");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Library","root","gtaplayer01");
             st = conn.createStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -23,25 +20,25 @@ public class Admin {
     }
 
 
-    public static List<String> adminUsername() throws SQLException {
-        ArrayList<String> userName = new ArrayList<>();
-        ResultSet rs = st.executeQuery("select username from administration");
-        while (rs.next())
-        {
-            userName.add(rs.getString("username"));
-        }
-        return userName;
-
-    }
-    public static List<String> adminPassword() throws SQLException {
-        ResultSet rs = st.executeQuery("select * from administration");
-        ArrayList<String> userPass = new ArrayList<>();
-        while (rs.next()) {
-            userPass.add(rs.getString("password"));
-
-        }
-        return userPass;
-    }
+//    public static List<String> adminUsername() throws SQLException {
+//        ArrayList<String> userName = new ArrayList<>();
+//        ResultSet rs = st.executeQuery("select username from administration");
+//        while (rs.next())
+//        {
+//            userName.add(rs.getString("username"));
+//        }
+//        return userName;
+//
+//    }
+//    public static List<String> adminPassword() throws SQLException {
+//        ResultSet rs = st.executeQuery("select * from administration");
+//        ArrayList<String> userPass = new ArrayList<>();
+//        while (rs.next()) {
+//            userPass.add(rs.getString("password"));
+//
+//        }
+//        return userPass;
+//    }
 
     public static void AdminAdd() throws SQLException {
         try  {
@@ -54,7 +51,7 @@ public class Admin {
             System.out.print("Enter Genre of Book ->  ");
             String genre = br.readLine();
             System.out.println();
-            System.out.println("Enter year of Publication ->  ");
+            System.out.print("Enter year of Publication ->  ");
             int year = Integer.parseInt(br.readLine());
             System.out.println();
             Add a = new Add();
@@ -67,8 +64,7 @@ public class Admin {
     public static void AdminRemove()  {
         try  {
             int remove = Integer.parseInt(br.readLine());
-            PreparedStatement pst = conn.prepareStatement("delete from LibTable"+"where id = ?");
-            pst.setInt(1,remove);
+            st.executeUpdate("delete from LibTable where Id =('"+remove+"')");
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }

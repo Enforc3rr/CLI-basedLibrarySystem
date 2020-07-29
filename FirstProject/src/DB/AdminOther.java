@@ -15,45 +15,43 @@ public class AdminOther {
             String s = null;
             s = br.readLine();
             System.out.println();
-            for (int i = 0; i <= Admin.adminUsername().size(); i++) {
-                if (s.equals(Admin.adminUsername().get(i))) {
-                    String password = br.readLine();
-                    System.out.print("Enter PassWord ->" + password);
-                    if (password.equals(Admin.adminPassword().get(i))) {
-                        MenuForAdmin.menuOptionsforAdmin();
-                        int selectedOption = MenuForAdmin.optionNumber();
-                        switch (selectedOption) {
-                            case 1:
-                                Admin.AdminAdd();
-                            case 2: {
-                                System.out.println("Enter ID of Book Which You Want to Remove -> ");
-                                Admin.AdminRemove();
-                            }
-
-                            case 3: {
-                                Info info = new Info();
-                                System.out.println(info.InfoBooks());
-                            }
-                            case 4: {
-                                System.out.println("Exiting....");
-                                break;
-                            }
-                            default: {
-                                System.out.println("Re-Enter The Option");
-                            }
-                        }
-                    } else {
-                        System.out.println("Wrong PassWord");
+            System.out.print("Enter PassWord -> ");
+            String password = br.readLine();
+            System.out.println();
+            if (s.equals("drew") && password.equals("123")) {
+                MenuForAdmin.menuOptionsforAdmin();
+                int selectedOption = MenuForAdmin.optionNumber();
+                switch (selectedOption) {
+                    case 1: {
+                        Admin.AdminAdd();
                         break;
                     }
-                } else {
-                    System.out.println("Re-Enter the user name");
-                    break;
+                    case 2: {
+                        System.out.println("Enter ID of Book Which You Want to Remove -> ");
+                        Admin.AdminRemove();
+                        break;
+                    }
+
+                    case 3: {
+                        Info info = new Info();
+                        info.InfoBooks();
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("Exiting....");
+                        break;
+                    }
+                    default: {
+                        System.out.println("Re-Enter The Option");
+                        break;
+                    }
                 }
+            } else {
+                System.out.println("Re-Enter the user name or Password");
             }
-        } catch (IOException | SQLException e)
-        {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
+
     }
 }
